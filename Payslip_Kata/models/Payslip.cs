@@ -4,7 +4,7 @@ namespace Payslip_Kata.models
 {
     public class Payslip
     {
-        public Payslip(DateTime startDate, Employee employee, AnnualSalary annualSalary, decimal grossIncome, decimal netIncome, decimal superAmount, decimal incomeTax, Guid paySlipNumber)
+        public Payslip(DateTime startDate, Employee employee, AnnualSalary annualSalary, decimal grossIncome, decimal netIncome, decimal superAmount, decimal incomeTax)
         {
             StartDate = startDate;
             Employee = employee;
