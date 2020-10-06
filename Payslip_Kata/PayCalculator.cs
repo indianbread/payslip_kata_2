@@ -7,7 +7,7 @@ namespace Payslip_Kata
 {
     public class PayCalculator
     {
-        public PayCalculator(int annualSalary, DateTime startDate, DateTime endDate)
+        public PayCalculator(AnnualSalary annualSalary, DateTime startDate, DateTime endDate)
         {
             _annualSalary = annualSalary;
             _startDate = startDate;
@@ -18,14 +18,14 @@ namespace Payslip_Kata
         
         public decimal CalculateIncomeTax()
         {
-            var annualIncomeTax = CalculateAnnualIncomeTax(_annualSalary);
+            var annualIncomeTax = CalculateAnnualIncomeTax();
             var incomeTax = (annualIncomeTax / 12) * Convert.ToDecimal(_payPeriodInMonths);
             return Math.Round(incomeTax, 0, MidpointRounding.AwayFromZero);
         }
         
         public decimal CalculateGrossIncome()
         {
-            var grossIncome = _annualSalary / 12 * Convert.ToDecimal(_payPeriodInMonths);
+            var grossIncome = _annualSalary.Amount / 12 * Convert.ToDecimal(_payPeriodInMonths);
             return Math.Round(grossIncome, 0, MidpointRounding.ToZero);
         }
         
@@ -37,9 +37,13 @@ namespace Payslip_Kata
             return grossIncome - incomeTax;
         }
         
-
+        public decimal CalculateSuper()
+        {
+            var grossIncome = CalculateGrossIncome();
+            var super = grossIncome * Convert.ToDecimal(_annualSalary.SuperRate / 100);
+            return Math.Round(super, 0, MidpointRounding.ToZero);
+        }
         
-
         private static double CalculateMonths(DateTime startDate, DateTime endDate)
         {
             return (endDate - startDate).TotalDays / (365 / 12);
@@ -47,8 +51,8 @@ namespace Payslip_Kata
 
         private decimal CalculateAnnualIncomeTax()
         {
-            var taxBracket = GetTaxBracket(_annualSalary);
-            var additionalAmount = (_annualSalary - taxBracket.Threshold) * (Convert.ToDecimal(taxBracket.RateInCents) / 100);
+            var taxBracket = GetTaxBracket(_annualSalary.Amount);
+            var additionalAmount = (_annualSalary.Amount - taxBracket.Threshold) * (Convert.ToDecimal(taxBracket.RateInCents) / 100);
             return taxBracket.BaseAmount + additionalAmount;
         }
         
@@ -59,11 +63,10 @@ namespace Payslip_Kata
         }
 
         private readonly List<TaxBracket> _taxBrackets;
-        private readonly int _annualSalary;
+        private readonly AnnualSalary _annualSalary;
         private readonly DateTime _startDate;
         private readonly DateTime _endDate;
         private readonly double _payPeriodInMonths;
-
-
+        
     }
 }

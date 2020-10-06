@@ -4,14 +4,14 @@ namespace Payslip_Kata.models
 {
     public class AnnualSalary
     {
-        public AnnualSalary(Guid employeeId, int superRate, int annualAmount)
+        public AnnualSalary(Guid employeeId, double superRate, int amount)
         {
             EmployeeId = employeeId;
             SuperRate = superRate;
-            AnnualAmount = annualAmount;
+            Amount = amount;
         }
         public Guid EmployeeId { get; }
-        public int SuperRate { get; }
-        public int AnnualAmount { get; }
+        public double SuperRate { get; }
+        public int Amount { get; }
     }
 }

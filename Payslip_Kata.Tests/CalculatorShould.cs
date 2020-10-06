@@ -1,4 +1,5 @@
 using System;
+using Payslip_Kata.models;
 using Xunit;
 
 namespace Payslip_Kata.Tests
@@ -9,7 +10,8 @@ namespace Payslip_Kata.Tests
         {
             var startDate = new DateTime(2020, 03, 01);
             var endDate = new DateTime(2020, 03, 31);
-            _sut = new PayCalculator(60050, startDate, endDate);
+            var annualSalary = new AnnualSalary(Guid.NewGuid(), 9, 60050 );
+            _sut = new PayCalculator(annualSalary, startDate, endDate);
         }
         private readonly PayCalculator _sut;
         
@@ -39,6 +41,15 @@ namespace Payslip_Kata.Tests
             
             Assert.Equal(expected, actual);
 
+        }
+
+        [Fact]
+        public void CalculateSuperAmount()
+        {
+            const int expected = 450;
+            var actual = _sut.CalculateSuper();
+            
+            Assert.Equal(expected, actual);
         }
         
     }
