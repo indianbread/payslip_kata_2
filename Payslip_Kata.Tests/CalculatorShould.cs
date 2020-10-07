@@ -10,7 +10,7 @@ namespace Payslip_Kata.Tests
         {
             var startDate = new DateTime(2020, 03, 01);
             var endDate = new DateTime(2020, 03, 31);
-            var annualSalary = new AnnualSalary(Guid.NewGuid(), 9, 60050 );
+            var annualSalary = new AnnualSalary(9, 60050 );
             _sut = new PayCalculator(annualSalary, startDate, endDate);
         }
         private readonly PayCalculator _sut;

@@ -13,10 +13,8 @@ namespace Payslip_Kata.models
             IncomeTax = incomeTax;
             NetIncome = netIncome;
             SuperAmount = superAmount;
-            PaySlipNumber = Guid.NewGuid();
         }
-
-        public Guid PaySlipNumber { get; }
+        
         public Employee Employee { get; }
         public DateTime StartDate { get; }
         public DateTime EndDate { get; }
