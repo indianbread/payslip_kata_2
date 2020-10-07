@@ -4,25 +4,25 @@ namespace Payslip_Kata.models
 {
     public class Payslip
     {
-        public Payslip(DateTime startDate, Employee employee, AnnualSalary annualSalary, decimal grossIncome, decimal netIncome, decimal superAmount, decimal incomeTax)
+        public Payslip(Employee employee, DateTime startDate, DateTime endDate, decimal grossIncome, decimal incomeTax, decimal netIncome, decimal superAmount)
         {
-            StartDate = startDate;
             Employee = employee;
-            AnnualSalary = annualSalary;
+            StartDate = startDate;
+            EndDate = endDate;
             GrossIncome = grossIncome;
+            IncomeTax = incomeTax;
             NetIncome = netIncome;
             SuperAmount = superAmount;
-            IncomeTax = incomeTax;
             PaySlipNumber = Guid.NewGuid();
         }
+
         public Guid PaySlipNumber { get; }
-        public DateTime StartDate { get; }
         public Employee Employee { get; }
-        public AnnualSalary AnnualSalary { get; }
+        public DateTime StartDate { get; }
+        public DateTime EndDate { get; }
         public decimal GrossIncome { get; }
+        public decimal IncomeTax { get; }
         public decimal NetIncome { get; }
         public decimal SuperAmount { get; }
-        public decimal IncomeTax { get; }
-        
     }
 }
