@@ -12,12 +12,14 @@ namespace Payslip_Kata.Tests
         {
             _mockInput = new Mock<IInput>();
             _mockOutput = new Mock<IOutput>();
-            _sut = new PayslipGenerator(_mockInput.Object, _mockOutput.Object);
+            _payCalculator = new PayCalculator();
+            _sut = new PayslipGenerator(_mockInput.Object, _mockOutput.Object, _payCalculator);
         }
         
         private Mock<IInput> _mockInput;
         private Mock<IOutput> _mockOutput;
         private PayslipGenerator _sut;
+        private PayCalculator _payCalculator;
 
         [Fact]
         public void CreateAnEmployeeFromGivenInput()

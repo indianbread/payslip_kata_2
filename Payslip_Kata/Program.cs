@@ -11,7 +11,8 @@ namespace Payslip_Kata
             var output = new ConsoleOutput();
             
             output.WriteLine("Welcome to the payslip generator!" + Environment.NewLine);
-            var payslipGenerator = new PayslipGenerator(input, output);
+            var payCalculator = new PayCalculator();
+            var payslipGenerator = new PayslipGenerator(input, output, payCalculator);
 
             var employee = payslipGenerator.GetEmployee();
             var annualSalary = payslipGenerator.GetAnnualSalary();

@@ -8,14 +8,16 @@ namespace Payslip_Kata
 {
     public class PayslipGenerator
     {
-        public PayslipGenerator(IInput input, IOutput output)
+        public PayslipGenerator(IInput input, IOutput output, PayCalculator payCalculator)
         {
             _input = input;
             _output = output;
+            _payCalculator = payCalculator;
         }
         
         private readonly IInput _input;
         private readonly IOutput _output;
+        private readonly PayCalculator _payCalculator;
 
         public Employee GetEmployee()
         {
@@ -74,11 +76,10 @@ namespace Payslip_Kata
 
         public Payslip GeneratePayslip(Employee employee, AnnualSalary annualSalary, DateTime startDate, DateTime endDate)
         {
-            var payCalculator = new PayCalculator(annualSalary, startDate, endDate);
-            var grossIncome = payCalculator.CalculateGrossIncome();
-            var incomeTax = payCalculator.CalculateIncomeTax();
-            var netIncome = payCalculator.CalculateNetIncome();
-            var superAmount = payCalculator.CalculateSuper();
+            var grossIncome = _payCalculator.CalculateGrossIncome(annualSalary, startDate, endDate);
+            var incomeTax = _payCalculator.CalculateIncomeTax(annualSalary, startDate, endDate);
+            var netIncome = _payCalculator.CalculateNetIncome(annualSalary, startDate, endDate);
+            var superAmount = _payCalculator.CalculateSuper(annualSalary, startDate, endDate);
             
             return new Payslip(employee, startDate, endDate, grossIncome, incomeTax, netIncome, superAmount);
         }
